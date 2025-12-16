@@ -1,0 +1,1684 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Языки России - ДОБРОВОЛЬНОЕ ОБЪЕДИНЕНИЕ СТУДЕНТОВ ДЛЯ ОБРАЗОВАНИЯ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --russian-white: #FFFFFF;
+            --russian-blue: #0039A6;
+            --russian-red: #D52B1E;
+            --russian-light: #F5F5F5;
+            --russian-dark: #1A1A1A;
+            --accent-green: #58CC02;
+            --accent-orange: #FF9500;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--russian-light) 0%, #E8F4F8 100%);
+            padding-top: 70px;
+            padding-bottom: 80px;
+            min-height: 100vh;
+        }
+        
+        /* Верхняя полоса триколора */
+        .top-tricolor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            z-index: 2000;
+            background: linear-gradient(to right, 
+                var(--russian-white) 33%, 
+                var(--russian-blue) 33%, 
+                var(--russian-blue) 66%, 
+                var(--russian-red) 66%);
+        }
+        
+        .navbar {
+            background: var(--russian-white);
+            box-shadow: 0 2px 15px rgba(0, 57, 166, 0.1);
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .navbar-brand {
+            color: var(--russian-dark) !important;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .navbar-subtitle {
+            font-size: 0.65rem;
+            color: var(--russian-blue);
+            font-weight: 500;
+            opacity: 0.8;
+            line-height: 1.1;
+            margin-top: 2px;
+            letter-spacing: 0.3px;
+        }
+        
+        .nav-link {
+            color: var(--russian-dark) !important;
+            font-weight: 500;
+        }
+        
+        .nav-link.active {
+            color: var(--russian-blue) !important;
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 15px;
+            right: 15px;
+            height: 3px;
+            background: linear-gradient(to right, var(--russian-white), var(--russian-blue), var(--russian-red));
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .nav-link i {
+            font-size: 1.2rem;
+            margin-bottom: 3px;
+        }
+        
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--russian-white);
+            box-shadow: 0 -2px 15px rgba(0, 57, 166, 0.1);
+            z-index: 1000;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .bottom-nav .nav-link {
+            color: #666 !important;
+            transition: all 0.3s;
+        }
+        
+        .bottom-nav .nav-link.active {
+            color: var(--russian-blue) !important;
+            font-weight: bold;
+        }
+        
+        .bottom-nav .nav-link i {
+            color: inherit;
+            font-size: 1.4rem;
+        }
+        
+        /* Карточки в стиле России */
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 57, 166, 0.08);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            background: var(--russian-white);
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 57, 166, 0.12);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--russian-white) 0%, #f8f9fa 100%);
+            border-bottom: 2px solid #e9ecef;
+            font-weight: 600;
+            color: var(--russian-dark);
+        }
+        
+        .russian-gradient {
+            background: linear-gradient(135deg, var(--russian-white) 0%, var(--russian-blue) 50%, var(--russian-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .progress {
+            height: 10px;
+            border-radius: 5px;
+            background-color: #e9ecef;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(to right, var(--russian-blue), var(--accent-green));
+            border-radius: 5px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--russian-blue), #1a4da6);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #00287a, var(--russian-blue));
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 57, 166, 0.2);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--accent-green), #4CAF50);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            font-weight: 600;
+        }
+        
+        .btn-outline-russian {
+            border: 2px solid var(--russian-blue);
+            color: var(--russian-blue);
+            border-radius: 25px;
+            padding: 8px 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline-russian:hover {
+            background: var(--russian-blue);
+            color: white;
+        }
+        
+        /* Специальные стили для русского языка */
+        .russian-language-card {
+            border-left: 4px solid var(--russian-red);
+            position: relative;
+        }
+        
+        .russian-language-card::before {
+            content: '★';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--russian-red);
+            font-size: 1.5rem;
+        }
+        
+        .language-card {
+            cursor: pointer;
+            border-left: 4px solid var(--russian-blue);
+        }
+        
+        .language-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--russian-blue), var(--russian-red));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        /* Стили для уроков */
+        .lesson-container {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .lesson-step {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 15px;
+            border-left: 3px solid var(--russian-blue);
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .lesson-step.completed {
+            border-left-color: var(--accent-green);
+            background: rgba(88, 204, 2, 0.05);
+        }
+        
+        .exercise-option {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+        }
+        
+        .exercise-option:hover {
+            border-color: var(--russian-blue);
+            background: #f8f9fa;
+        }
+        
+        .exercise-option.selected {
+            border-color: var(--russian-blue);
+            background: rgba(0, 57, 166, 0.05);
+        }
+        
+        .exercise-option.correct {
+            background-color: rgba(88, 204, 2, 0.1);
+            border-color: var(--accent-green);
+            color: #155724;
+        }
+        
+        .exercise-option.wrong {
+            background-color: rgba(220, 53, 69, 0.1);
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        /* Анимации */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Статистика и достижения */
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #f8f9fa, white);
+        }
+        
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--russian-blue), var(--russian-red));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .achievement-badge {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .badge-gold { 
+            background: linear-gradient(135deg, #FFD700, #FFA500); 
+            color: white; 
+        }
+        
+        .badge-silver { 
+            background: linear-gradient(135deg, #C0C0C0, #808080); 
+            color: white; 
+        }
+        
+        .badge-bronze { 
+            background: linear-gradient(135deg, #CD7F32, #8B4513); 
+            color: white; 
+        }
+        
+        .badge-russian { 
+            background: linear-gradient(135deg, var(--russian-white), var(--russian-blue), var(--russian-red)); 
+            color: white; 
+        }
+        
+        /* Лента новостей */
+        .news-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            transition: all 0.3s;
+        }
+        
+        .news-item:hover {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .news-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--russian-blue), var(--russian-red));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .news-like {
+            color: #dc3545;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .news-like:hover {
+            transform: scale(1.2);
+        }
+        
+        .news-like.liked {
+            color: #dc3545;
+        }
+        
+        /* Чат */
+        .chat-container {
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: linear-gradient(135deg, #f8f9fa, white);
+            border-radius: 10px;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            max-width: 80%;
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .message-incoming {
+            align-self: flex-start;
+        }
+        
+        .message-outgoing {
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        .message-bubble {
+            padding: 12px 16px;
+            border-radius: 18px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .message-incoming .message-bubble {
+            background: white;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .message-outgoing .message-bubble {
+            background: linear-gradient(135deg, var(--russian-blue), #1a4da6);
+            color: white;
+        }
+        
+        .message-time {
+            font-size: 0.75rem;
+            color: #666;
+            margin-top: 4px;
+        }
+        
+        /* Результаты уроков */
+        .results-card {
+            background: linear-gradient(135deg, #f8f9fa, white);
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .results-score {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--russian-blue), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+        }
+        
+        .fireworks {
+            font-size: 2rem;
+            animation: pulse 1s infinite;
+        }
+        
+        /* Мобильная адаптация */
+        @media (max-width: 768px) {
+            .bottom-nav .nav-link i {
+                font-size: 1.2rem;
+            }
+            
+            .bottom-nav .small {
+                font-size: 0.7rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1rem;
+            }
+            
+            .navbar-subtitle {
+                font-size: 0.6rem;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+            
+            .stat-number {
+                font-size: 1.8rem;
+            }
+            
+            .navbar-brand img {
+                height: 35px !important;
+                margin-right: 8px !important;
+            }
+        }
+        
+        /* Прокрутка */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--russian-blue), var(--russian-red));
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #00287a, #b22222);
+        }
+        
+        /* Стили для логотипа */
+        .navbar-brand img {
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-brand img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Верхняя полоса триколора -->
+    <div class="top-tricolor"></div>
+    
+    <!-- Верхняя навигация -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#" onclick="switchScreen('home')">
+                <!-- Ваш логотип -->
+               <img src="https://i.yapx.ru/cWX91.png" 
+                     alt="Логотип Языки России" 
+                     class="me-3"
+                     style="height: 45px; width: auto; max-width: 45px; object-fit: contain; border-radius: 4px;">
+                
+                <!-- Название и подзаголовок -->
+                <div>
+                    <div style="font-weight: 700; font-size: 1.1rem; color: var(--russian-dark); line-height: 1.1;">
+                       MonoMax - Учи родное!
+                    </div>
+                    <div class="navbar-subtitle">ДОБРОВОЛЬНОЕ ОБЪЕДИНЕНИЕ СТУДЕНТОВ ДЛЯ ОБРАЗОВАНИЯ</div>
+                </div>
+            </a>
+            <div class="d-flex align-items-center">
+                <span class="badge bg-warning me-3" id="streak-counter">
+                    <i class="bi bi-fire"></i> <span id="streak-days">7</span>
+                </span>
+                <span class="badge bg-light text-dark" id="xp-counter">
+                    <i class="bi bi-trophy"></i> <span id="xp-total">325</span> XP
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <div class="container mt-3" id="content">
+        <!-- Главный экран -->
+        <div id="home-screen">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title russian-gradient mb-3">Добро пожаловать!</h4>
+                    <p class="text-muted mb-4">Изучайте языки народов России вместе с нашим сообществом</p>
+                    
+                    <div class="row align-items-center mb-4">
+                        <div class="col-md-8">
+                            <h5 class="mb-2">Ваш прогресс сегодня</h5>
+                            <div class="progress mb-2">
+                                <div class="progress-bar" id="daily-progress" style="width: 66%"></div>
+                            </div>
+                            <p class="text-muted mb-0" id="daily-stats">2/3 уроков выполнено</p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <button class="btn btn-primary" onclick="switchScreen('learn')">
+                                <i class="bi bi-arrow-right"></i> Продолжить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Быстрый доступ к языкам -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Быстрый доступ</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="card russian-language-card" onclick="startLearningRussian()">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="language-icon me-3">РУ</div>
+                                        <div class="flex-grow-1">
+                                            <h5 class="mb-1">Русский язык</h5>
+                                            <p class="text-muted mb-2">Как второй родной</p>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="badge bg-danger">Рекомендуется</span>
+                                                <small class="text-muted">15 уроков</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="card language-card" onclick="startLearningTatar()">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="language-icon me-3">ТА</div>
+                                        <div class="flex-grow-1">
+                                            <h5 class="mb-1">Татарский</h5>
+                                            <p class="text-muted mb-2">Начальный уровень</p>
+                                            <div class="d-flex justify-content-between">
+                                                <span class="badge bg-success">В процессе</span>
+                                                <small class="text-muted">65% освоено</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Статистика -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">Ваша статистика</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-3 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-number" id="total-lessons">12</div>
+                                <small>уроков</small>
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-number" id="total-words">187</div>
+                                <small>слов</small>
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-number" id="streak-current">7</div>
+                                <small>дней подряд</small>
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-number" id="total-languages">3</div>
+                                <small>языка</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Экран изучения -->
+        <div id="learn-screen" style="display: none;">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h4 class="card-title mb-1" id="current-language-title">Татарский язык</h4>
+                            <p class="text-muted mb-0" id="current-lesson-title">Урок 3: Основные фразы</p>
+                        </div>
+                        <div class="text-end">
+                            <div class="progress mb-1" style="width: 150px;">
+                                <div class="progress-bar" id="lesson-progress" style="width: 45%"></div>
+                            </div>
+                            <small class="text-muted" id="lesson-progress-text">Шаг 2/5</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Контейнер урока -->
+            <div id="lesson-container">
+                <!-- Урок будет загружаться динамически -->
+            </div>
+
+            <!-- Навигация урока -->
+            <div class="card" id="lesson-navigation" style="display: none;">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-outline-russian" onclick="previousStep()" id="prev-btn">
+                            <i class="bi bi-arrow-left"></i> Назад
+                        </button>
+                        <button class="btn btn-primary" onclick="nextStep()" id="next-btn">
+                            Далее <i class="bi bi-arrow-right"></i>
+                        </button>
+                        <button class="btn btn-success" onclick="completeLesson()" id="complete-btn" style="display: none;">
+                            <i class="bi bi-check-circle"></i> Завершить урок
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Экран языков -->
+        <div id="languages-screen" style="display: none;">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title russian-gradient mb-3">Языки народов России</h4>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control search-box" placeholder="Поиск языков..." id="searchInput">
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-select" id="familyFilter" onchange="filterLanguages()">
+                                <option value="all">Все языковые семьи</option>
+                                <option value="Русский">Русский язык</option>
+                                <option value="Тюркские">Тюркские языки</option>
+                                <option value="Уральские">Уральские языки</option>
+                                <option value="Кавказские">Кавказские языки</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-number">150+</div>
+                                <small>языков России</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-number">35</div>
+                                <small>имеют письменность</small>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="stat-card">
+                                <div class="stat-number">7</div>
+                                <small>языковых семей</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="languages-list">
+                <!-- Языки будут добавляться динамически -->
+            </div>
+        </div>
+
+        <!-- Лента новостей -->
+        <div id="news-screen" style="display: none;">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Лента сообщества</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Новости будут добавляться динамически -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Чат -->
+        <div id="chat-screen" style="display: none;">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Сообщения</h5>
+                    <!-- Чат будет загружаться динамически -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Профиль -->
+        <div id="profile-screen" style="display: none;">
+            <!-- Профиль будет загружаться динамически -->
+        </div>
+    </div>
+
+    <!-- Нижняя навигация -->
+    <div class="bottom-nav">
+        <div class="container">
+            <div class="row py-2">
+                <div class="col text-center">
+                    <a href="#" class="nav-link active" onclick="switchScreen('home')">
+                        <i class="bi bi-house"></i>
+                        <div class="small">Главная</div>
+                    </a>
+                </div>
+                <div class="col text-center">
+                    <a href="#" class="nav-link" onclick="switchScreen('learn')">
+                        <i class="bi bi-journal-bookmark"></i>
+                        <div class="small">Обучение</div>
+                    </a>
+                </div>
+                <div class="col text-center">
+                    <a href="#" class="nav-link" onclick="switchScreen('languages')">
+                        <i class="bi bi-translate"></i>
+                        <div class="small">Языки</div>
+                    </a>
+                </div>
+                <div class="col text-center">
+                    <a href="#" class="nav-link" onclick="switchScreen('news')">
+                        <i class="bi bi-newspaper"></i>
+                        <div class="small">Лента</div>
+                    </a>
+                </div>
+                <div class="col text-center">
+                    <a href="#" class="nav-link" onclick="switchScreen('profile')">
+                        <i class="bi bi-person"></i>
+                        <div class="small">Профиль</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно результатов -->
+    <div class="modal fade" id="resultsModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-5">
+                    <div class="fireworks mb-3">🎉 🎊 🎉</div>
+                    <h4 class="mb-3">Урок завершён!</h4>
+                    <div class="results-score" id="final-score">95%</div>
+                    <p class="text-muted mb-4" id="results-message">Отличный результат! Вы успешно прошли урок.</p>
+                    <div class="row mb-4">
+                        <div class="col-6">
+                            <div class="stat-card">
+                                <div class="stat-number" id="correct-answers">4</div>
+                                <small>правильных</small>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-card">
+                                <div class="stat-number" id="xp-earned">50</div>
+                                <small>XP получено</small>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary w-100" data-bs-dismiss="modal" onclick="switchScreen('home')">
+                        <i class="bi bi-house"></i> На главную
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Данные приложения
+        const appData = {
+            currentUser: {
+                name: 'Алексей Петров',
+                avatar: 'АП',
+                level: 3,
+                xp: 325,
+                streak: 7,
+                lessons: 12,
+                words: 187,
+                languages: 3,
+                bio: 'Студент, изучаю языки народов России'
+            },
+            
+            currentLesson: null,
+            currentStep: 0,
+            lessonAnswers: [],
+            lessonScore: 0
+        };
+
+        // Данные языков
+        const languages = [
+            {
+                id: 'russian',
+                name: 'Русский язык',
+                nativeName: 'русский язык',
+                family: 'Русский',
+                speakers: '258M',
+                region: 'Россия, СНГ',
+                difficulty: 'разные уровни',
+                color: '#D52B1E',
+                description: 'Изучение русского как второго родного языка',
+                lessons: 15,
+                recommended: true
+            },
+            { id: 'tatar', name: 'Татарский', nativeName: 'татар теле', family: 'Тюркские', speakers: '5.4M', region: 'Татарстан', difficulty: 'средний', color: '#0039A6', lessons: 12 },
+            { id: 'bashkir', name: 'Башкирский', nativeName: 'башҡорт теле', family: 'Тюркские', speakers: '1.2M', region: 'Башкортостан', difficulty: 'средний', color: '#4CAF50', lessons: 10 },
+            { id: 'chuvash', name: 'Чувашский', nativeName: 'чӑваш чӗлхи', family: 'Тюркские', speakers: '1M', region: 'Чувашия', difficulty: 'средний', color: '#FF9800', lessons: 10 },
+            { id: 'chechen', name: 'Чеченский', nativeName: 'нохчийн мотт', family: 'Кавказские', speakers: '1.4M', region: 'Чечня', difficulty: 'сложный', color: '#795548', lessons: 8 },
+            { id: 'mari', name: 'Марийский', nativeName: 'марий йылме', family: 'Уральские', speakers: '388K', region: 'Марий Эл', difficulty: 'средний', color: '#9C27B0', lessons: 8 },
+            { id: 'udmurt', name: 'Удмуртский', nativeName: 'удмурт кыл', family: 'Уральские', speakers: '324K', region: 'Удмуртия', difficulty: 'средний', color: '#2196F3', lessons: 8 },
+            { id: 'komi', name: 'Коми', nativeName: 'коми кыв', family: 'Уральские', speakers: '160K', region: 'Коми', difficulty: 'средний', color: '#009688', lessons: 8 },
+            { id: 'yakut', name: 'Якутский', nativeName: 'саха тыла', family: 'Тюркские', speakers: '450K', region: 'Якутия', difficulty: 'сложный', color: '#607D8B', lessons: 6 }
+        ];
+
+        // Уроки русского языка
+        const russianLessons = [
+            {
+                id: 'russian-1',
+                title: 'Базовые фразы и приветствия',
+                steps: [
+                    {
+                        type: 'instruction',
+                        title: 'Приветствие',
+                        content: 'Изучите основные фразы для приветствия на русском языке'
+                    },
+                    {
+                        type: 'vocabulary',
+                        title: 'Словарь',
+                        content: 'Запомните эти слова:',
+                        words: [
+                            { russian: 'Здравствуйте', translation: 'Hello (formal)' },
+                            { russian: 'Привет', translation: 'Hi (informal)' },
+                            { russian: 'Доброе утро', translation: 'Good morning' },
+                            { russian: 'Добрый день', translation: 'Good afternoon' },
+                            { russian: 'Добрый вечер', translation: 'Good evening' }
+                        ]
+                    },
+                    {
+                        type: 'exercise',
+                        title: 'Практика',
+                        question: 'Как сказать "Good morning" по-русски?',
+                        options: ['Здравствуйте', 'Доброе утро', 'Привет', 'Добрый день'],
+                        correct: 1
+                    },
+                    {
+                        type: 'exercise',
+                        title: 'Практика',
+                        question: 'Выберите формальное приветствие:',
+                        options: ['Привет', 'Здорово', 'Здравствуйте', 'Добрый'],
+                        correct: 2
+                    },
+                    {
+                        type: 'completion',
+                        title: 'Молодец!',
+                        content: 'Вы изучили основные приветствия на русском языке'
+                    }
+                ]
+            },
+            {
+                id: 'russian-2',
+                title: 'Основные глаголы',
+                steps: [
+                    {
+                        type: 'instruction',
+                        title: 'Глаголы',
+                        content: 'Изучите самые важные глаголы в русском языке'
+                    },
+                    {
+                        type: 'vocabulary',
+                        title: 'Словарь',
+                        content: 'Основные глаголы:',
+                        words: [
+                            { russian: 'быть', translation: 'to be' },
+                            { russian: 'делать', translation: 'to do' },
+                            { russian: 'говорить', translation: 'to speak' },
+                            { russian: 'понимать', translation: 'to understand' },
+                            { russian: 'знать', translation: 'to know' }
+                        ]
+                    },
+                    {
+                        type: 'exercise',
+                        title: 'Практика',
+                        question: 'Какой глагол означает "to understand"?',
+                        options: ['говорить', 'понимать', 'делать', 'знать'],
+                        correct: 1
+                    }
+                ]
+            }
+        ];
+
+        // Уроки татарского языка
+        const tatarLessons = [
+            {
+                id: 'tatar-1',
+                title: 'Основные фразы',
+                steps: [
+                    {
+                        type: 'instruction',
+                        title: 'Приветствие на татарском',
+                        content: 'Изучите основные фразы для общения на татарском языке'
+                    },
+                    {
+                        type: 'vocabulary',
+                        title: 'Словарь',
+                        content: 'Основные фразы:',
+                        words: [
+                            { russian: 'Здравствуйте', tatar: 'Сәлам' },
+                            { russian: 'Спасибо', tatar: 'Рәхмәт' },
+                            { russian: 'Пожалуйста', tatar: 'Зинһар' },
+                            { russian: 'Как дела?', tatar: 'Ничек яшисез?' },
+                            { russian: 'Хорошо', tatar: 'Яхшы' }
+                        ]
+                    },
+                    {
+                        type: 'exercise',
+                        title: 'Практика',
+                        question: 'Как сказать "Спасибо" по-татарски?',
+                        options: ['Сәлам', 'Рәхмәт', 'Зинһар', 'Яхшы'],
+                        correct: 1
+                    },
+                    {
+                        type: 'exercise',
+                        title: 'Практика',
+                        question: 'Что означает "Сәлам"?',
+                        options: ['Спасибо', 'Пожалуйста', 'Здравствуйте', 'Хорошо'],
+                        correct: 2
+                    },
+                    {
+                        type: 'conversation',
+                        title: 'Диалог',
+                        content: 'Составьте диалог, используя изученные фразы',
+                        dialog: [
+                            { speaker: 'A', text: 'Сәлам!' },
+                            { speaker: 'B', text: 'Сәлам! Ничек яшисез?' },
+                            { speaker: 'A', text: 'Яхшы, рәхмәт!' }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // Инициализация приложения
+        document.addEventListener('DOMContentLoaded', function() {
+            updateUserInterface();
+            updateGreeting();
+            
+            // Загружаем начальный экран
+            loadLanguages();
+            loadNewsFeed();
+        });
+
+        // Обновление интерфейса
+        function updateUserInterface() {
+            const user = appData.currentUser;
+            
+            // Обновляем статистику
+            document.getElementById('streak-days').textContent = user.streak;
+            document.getElementById('xp-total').textContent = user.xp;
+            document.getElementById('total-lessons').textContent = user.lessons;
+            document.getElementById('total-words').textContent = user.words;
+            document.getElementById('streak-current').textContent = user.streak;
+            document.getElementById('total-languages').textContent = user.languages;
+            
+            // Обновляем прогресс
+            const progress = (user.lessons % 3) + 1;
+            document.getElementById('daily-progress').style.width = `${(progress / 3) * 100}%`;
+            document.getElementById('daily-stats').textContent = `${progress}/3 уроков выполнено`;
+        }
+
+        // Обновление приветствия
+        function updateGreeting() {
+            const hour = new Date().getHours();
+            let greeting;
+            
+            if (hour >= 5 && hour < 12) greeting = 'Доброе утро';
+            else if (hour >= 12 && hour < 18) greeting = 'Добрый день';
+            else if (hour >= 18 && hour < 23) greeting = 'Добрый вечер';
+            else greeting = 'Доброй ночи';
+            
+            // Можно добавить отображение приветствия
+        }
+
+        // Переключение экранов
+        function switchScreen(screen) {
+            // Скрываем все экраны
+            document.querySelectorAll('[id$="-screen"]').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            // Показываем выбранный экран
+            document.getElementById(`${screen}-screen`).style.display = 'block';
+            
+            // Обновляем активную вкладку
+            document.querySelectorAll('.bottom-nav .nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            
+            // Загружаем данные для экрана
+            switch(screen) {
+                case 'languages':
+                    loadLanguages();
+                    break;
+                case 'news':
+                    loadNewsFeed();
+                    break;
+                case 'chat':
+                    loadChat();
+                    break;
+                case 'profile':
+                    loadProfile();
+                    break;
+            }
+        }
+
+        // Загрузка списка языков
+        function loadLanguages(filter = 'all', search = '') {
+            const container = document.getElementById('languages-list');
+            container.innerHTML = '';
+            
+            const filtered = languages.filter(lang => {
+                const matchesFilter = filter === 'all' || lang.family === filter;
+                const matchesSearch = search === '' || 
+                    lang.name.toLowerCase().includes(search.toLowerCase()) ||
+                    lang.nativeName.toLowerCase().includes(search.toLowerCase());
+                return matchesFilter && matchesSearch;
+            });
+            
+            filtered.forEach(lang => {
+                const col = document.createElement('div');
+                col.className = 'col-md-6 mb-3';
+                col.innerHTML = `
+                    <div class="card ${lang.recommended ? 'russian-language-card' : 'language-card'} h-100" onclick="selectLanguage('${lang.id}')">
+                        <div class="card-body">
+                            <div class="d-flex align-items-start mb-3">
+                                <div class="language-icon me-3" style="background: linear-gradient(135deg, ${lang.family === 'Русский' ? '#D52B1E' : '#0039A6'}, ${lang.color})">
+                                    ${lang.name.substring(0, 2)}
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1">${lang.name}</h5>
+                                    <p class="text-muted mb-2"><em>${lang.nativeName}</em></p>
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <span class="badge" style="background: ${lang.color}; color: white;">${lang.family}</span>
+                                        <small class="text-muted">👥 ${lang.speakers}</small>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <small><i class="bi bi-geo-alt"></i> ${lang.region}</small>
+                                        </div>
+                                        <div class="col-6 text-end">
+                                            <small><i class="bi bi-journal-text"></i> ${lang.lessons} уроков</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary w-100 mt-2" onclick="startLanguage('${lang.id}')">
+                                ${lang.recommended ? '<i class="bi bi-star-fill me-2"></i>' : ''}
+                                Начать изучение
+                            </button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(col);
+            });
+        }
+
+        // Фильтрация языков
+        function filterLanguages() {
+            const filter = document.getElementById('familyFilter').value;
+            const search = document.getElementById('searchInput').value;
+            loadLanguages(filter, search);
+        }
+
+        // Поиск языков
+        document.getElementById('searchInput')?.addEventListener('input', function() {
+            const filter = document.getElementById('familyFilter').value;
+            loadLanguages(filter, this.value);
+        });
+
+        // Выбор языка
+        function selectLanguage(langId) {
+            const lang = languages.find(l => l.id === langId);
+            alert(`Выбран язык: ${lang.name}`);
+        }
+
+        // Начать изучение языка
+        function startLanguage(langId) {
+            const lang = languages.find(l => l.id === langId);
+            
+            // Загружаем уроки для выбранного языка
+            let lessons;
+            if (langId === 'russian') {
+                lessons = russianLessons;
+            } else if (langId === 'tatar') {
+                lessons = tatarLessons;
+            } else {
+                lessons = [tatarLessons[0]]; // Для других языков используем базовый урок
+            }
+            
+            // Начинаем первый урок
+            startLesson(langId, lessons[0]);
+        }
+
+        // Начать изучение русского языка
+        function startLearningRussian() {
+            startLanguage('russian');
+        }
+
+        // Начать изучение татарского языка
+        function startLearningTatar() {
+            startLanguage('tatar');
+        }
+
+        // Начать урок
+        function startLesson(langId, lesson) {
+            appData.currentLesson = lesson;
+            appData.currentStep = 0;
+            appData.lessonAnswers = [];
+            appData.lessonScore = 0;
+            
+            // Обновляем интерфейс
+            const lang = languages.find(l => l.id === langId);
+            document.getElementById('current-language-title').textContent = lang.name;
+            document.getElementById('current-lesson-title').textContent = lesson.title;
+            
+            // Переключаемся на экран обучения
+            switchScreen('learn');
+            
+            // Загружаем первый шаг
+            loadStep(0);
+        }
+
+        // Загрузка шага урока
+        function loadStep(stepIndex) {
+            const container = document.getElementById('lesson-container');
+            const lesson = appData.currentLesson;
+            const step = lesson.steps[stepIndex];
+            
+            container.innerHTML = '';
+            container.className = 'lesson-step fade-in';
+            
+            // Обновляем прогресс
+            const progress = ((stepIndex + 1) / lesson.steps.length) * 100;
+            document.getElementById('lesson-progress').style.width = `${progress}%`;
+            document.getElementById('lesson-progress-text').textContent = `Шаг ${stepIndex + 1}/${lesson.steps.length}`;
+            
+            // Отображаем шаг в зависимости от типа
+            switch(step.type) {
+                case 'instruction':
+                    container.innerHTML = `
+                        <h5 class="mb-3"><i class="bi bi-info-circle me-2" style="color: var(--russian-blue);"></i>${step.title}</h5>
+                        <p class="lead">${step.content}</p>
+                        <div class="text-center mt-4">
+                            <i class="bi bi-lightbulb fs-1" style="color: var(--accent-orange);"></i>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'vocabulary':
+                    let wordsHtml = '';
+                    step.words.forEach(word => {
+                        wordsHtml += `
+                            <div class="d-flex justify-content-between align-items-center p-3 mb-2" style="background: white; border-radius: 8px;">
+                                <div>
+                                    <strong>${word.russian}</strong>
+                                    <div class="text-muted">${word.translation || word.tatar}</div>
+                                </div>
+                                <i class="bi bi-volume-up" style="cursor: pointer;" onclick="playWord('${word.russian}')"></i>
+                            </div>
+                        `;
+                    });
+                    
+                    container.innerHTML = `
+                        <h5 class="mb-3"><i class="bi bi-journal-text me-2" style="color: var(--russian-blue);"></i>${step.title}</h5>
+                        <p class="mb-4">${step.content}</p>
+                        ${wordsHtml}
+                        <div class="mt-4">
+                            <button class="btn btn-outline-russian" onclick="practiceWords()">
+                                <i class="bi bi-arrow-repeat"></i> Повторить слова
+                            </button>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'exercise':
+                    let optionsHtml = '';
+                    step.options.forEach((option, index) => {
+                        optionsHtml += `
+                            <div class="exercise-option" onclick="selectAnswer(${index}, ${step.correct})">
+                                ${option}
+                            </div>
+                        `;
+                    });
+                    
+                    container.innerHTML = `
+                        <h5 class="mb-3"><i class="bi bi-question-circle me-2" style="color: var(--russian-blue);"></i>${step.title}</h5>
+                        <p class="lead mb-4">${step.question}</p>
+                        ${optionsHtml}
+                    `;
+                    break;
+                    
+                case 'conversation':
+                    let dialogHtml = '';
+                    step.dialog.forEach(line => {
+                        dialogHtml += `
+                            <div class="mb-3 p-3" style="background: ${line.speaker === 'A' ? '#f8f9fa' : 'white'}; border-radius: 10px;">
+                                <strong>${line.speaker}:</strong> ${line.text}
+                            </div>
+                        `;
+                    });
+                    
+                    container.innerHTML = `
+                        <h5 class="mb-3"><i class="bi bi-chat-dots me-2" style="color: var(--russian-blue);"></i>${step.title}</h5>
+                        <p class="mb-4">${step.content}</p>
+                        ${dialogHtml}
+                        <div class="mt-4">
+                            <button class="btn btn-primary" onclick="practiceConversation()">
+                                <i class="bi bi-mic"></i> Практика произношения
+                            </button>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'completion':
+                    container.innerHTML = `
+                        <div class="text-center">
+                            <i class="bi bi-check-circle fs-1 mb-3" style="color: var(--accent-green);"></i>
+                            <h5 class="mb-3">${step.title}</h5>
+                            <p class="lead mb-4">${step.content}</p>
+                            <div class="p-3 mb-3" style="background: rgba(88, 204, 2, 0.1); border-radius: 10px;">
+                                <i class="bi bi-lightning me-2"></i>
+                                <strong>Вы изучили новые слова и фразы!</strong>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            // Показываем навигацию
+            document.getElementById('lesson-navigation').style.display = 'block';
+            
+            // Настраиваем кнопки навигации
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const completeBtn = document.getElementById('complete-btn');
+            
+            prevBtn.style.display = stepIndex > 0 ? 'inline-block' : 'none';
+            
+            if (stepIndex === lesson.steps.length - 1) {
+                nextBtn.style.display = 'none';
+                completeBtn.style.display = 'inline-block';
+            } else {
+                nextBtn.style.display = 'inline-block';
+                completeBtn.style.display = 'none';
+            }
+        }
+
+        // Выбор ответа в упражнении
+        function selectAnswer(selectedIndex, correctIndex) {
+            const options = document.querySelectorAll('.exercise-option');
+            
+            // Сбрасываем предыдущие стили
+            options.forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'wrong');
+            });
+            
+            // Применяем новые стили
+            const selectedOption = options[selectedIndex];
+            selectedOption.classList.add('selected');
+            
+            // Проверяем ответ
+            if (selectedIndex === correctIndex) {
+                selectedOption.classList.add('correct');
+                appData.lessonScore++;
+                showFeedback('Правильно!', 'success');
+            } else {
+                selectedOption.classList.add('wrong');
+                options[correctIndex].classList.add('correct');
+                showFeedback('Попробуйте еще раз', 'error');
+            }
+            
+            // Сохраняем ответ
+            appData.lessonAnswers.push({
+                step: appData.currentStep,
+                selected: selectedIndex,
+                correct: correctIndex,
+                isCorrect: selectedIndex === correctIndex
+            });
+        }
+
+        // Показать обратную связь
+        function showFeedback(message, type) {
+            const feedback = document.createElement('div');
+            feedback.className = `alert alert-${type === 'success' ? 'success' : 'danger'} mt-3 fade-in`;
+            feedback.innerHTML = `
+                <i class="bi bi-${type === 'success' ? 'check-circle' : 'exclamation-circle'} me-2"></i>
+                ${message}
+            `;
+            
+            const container = document.getElementById('lesson-container');
+            container.appendChild(feedback);
+            
+            // Удаляем через 2 секунды
+            setTimeout(() => {
+                feedback.remove();
+            }, 2000);
+        }
+
+        // Следующий шаг
+        function nextStep() {
+            if (appData.currentStep < appData.currentLesson.steps.length - 1) {
+                appData.currentStep++;
+                loadStep(appData.currentStep);
+            }
+        }
+
+        // Предыдущий шаг
+        function previousStep() {
+            if (appData.currentStep > 0) {
+                appData.currentStep--;
+                loadStep(appData.currentStep);
+            }
+        }
+
+        // Завершить урок
+        function completeLesson() {
+            // Рассчитываем результат
+            const totalQuestions = appData.lessonAnswers.length;
+            const correctAnswers = appData.lessonAnswers.filter(a => a.isCorrect).length;
+            const score = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 100;
+            
+            // Начисляем XP
+            const xpEarned = Math.round(score / 10) * 10;
+            appData.currentUser.xp += xpEarned;
+            appData.currentUser.lessons++;
+            appData.currentUser.words += 5;
+            
+            // Обновляем статистику
+            updateUserInterface();
+            
+            // Показываем результаты
+            showResults(score, correctAnswers, totalQuestions, xpEarned);
+        }
+
+        // Показать результаты урока
+        function showResults(score, correct, total, xp) {
+            const modal = new bootstrap.Modal(document.getElementById('resultsModal'));
+            
+            // Обновляем данные в модальном окне
+            document.getElementById('final-score').textContent = `${score}%`;
+            document.getElementById('correct-answers').textContent = correct;
+            document.getElementById('xp-earned').textContent = xp;
+            
+            // Устанавливаем сообщение в зависимости от результата
+            let message;
+            if (score >= 90) message = 'Отличный результат! Вы прекрасно справились!';
+            else if (score >= 70) message = 'Хороший результат! Продолжайте в том же духе!';
+            else if (score >= 50) message = 'Неплохо, но есть куда стремиться!';
+            else message = 'Попробуйте пройти урок еще раз для лучшего результата.';
+            
+            document.getElementById('results-message').textContent = message;
+            
+            // Показываем модальное окно
+            modal.show();
+        }
+
+        // Имитация произношения слова
+        function playWord(word) {
+            // В реальном приложении здесь было бы воспроизведение аудио
+            alert(`Произношение слова: ${word}`);
+        }
+
+        // Практика слов
+        function practiceWords() {
+            alert('Режим повторения слов активирован');
+        }
+
+        // Практика диалога
+        function practiceConversation() {
+            alert('Режим практики произношения активирован');
+        }
+
+        // Загрузка ленты новостей
+        function loadNewsFeed() {
+            const container = document.querySelector('#news-screen .card-body');
+            const news = [
+                {
+                    id: 1,
+                    user: 'Мария К.',
+                    avatar: 'МК',
+                    text: 'Только что завершила 10-дневную серию изучения башкирского языка! 🎉',
+                    time: '2 минуты назад',
+                    likes: 24,
+                    liked: false
+                },
+                {
+                    id: 2,
+                    user: 'Александр И.',
+                    avatar: 'АИ',
+                    text: 'Выучил 50 новых слов на чувашском языке за неделю! Отличный прогресс! 📚',
+                    time: '1 час назад',
+                    likes: 18,
+                    liked: true
+                },
+                {
+                    id: 3,
+                    user: 'Ольга С.',
+                    avatar: 'ОС',
+                    text: 'Новый рекорд: 45 минут непрерывной практики якутского языка! 💪',
+                    time: '3 часа назад',
+                    likes: 42,
+                    liked: false
+                },
+                {
+                    id: 4,
+                    user: 'Дмитрий В.',
+                    avatar: 'ДВ',
+                    text: 'Достиг 5-го уровня в изучении татарского языка! Поздравляем! 🏆',
+                    time: '5 часов назад',
+                    likes: 31,
+                    liked: false
+                }
+            ];
+            
+            let html = '';
+            news.forEach(item => {
+                html += `
+                    <div class="news-item">
+                        <div class="d-flex">
+                            <div class="news-avatar me-3">${item.avatar}</div>
+                            <div class="flex-grow-1">
+                                <h6 class="mb-1">${item.user}</h6>
+                                <p class="mb-2">${item.text}</p>
+                                <div class="d-flex justify-content-between">
+                                    <small class="text-muted">${item.time}</small>
+                                    <div>
+                                        <i class="bi bi-heart news-like ${item.liked ? 'liked' : ''}" 
+                                           onclick="toggleLike(this, ${item.id})"></i>
+                                        <small class="ms-1">${item.likes}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Лайк в ленте
+        function toggleLike(element, newsId) {
+            element.classList.toggle('liked');
+            const countElement = element.nextElementSibling;
+            let count = parseInt(countElement.textContent);
+            count = element.classList.contains('liked') ? count + 1 : count - 1;
+            countElement.textContent = count;
+        }
+
+        // Загрузка чата
+        function loadChat() {
+            const container = document.querySelector('#chat-screen .card-body');
+            const friends = [
+                { name: 'Мария К.', avatar: 'МК', lastMessage: 'Привет! Как успехи с башкирским?', time: '2 мин', unread: 1 },
+                { name: 'Александр И.', avatar: 'АИ', lastMessage: 'Нашел отличный ресурс по чувашскому!', time: '1 ч', unread: 0 },
+                { name: 'Ольга С.', avatar: 'ОС', lastMessage: 'Готовимся к языковому марафону?', time: '3 ч', unread: 0 }
+            ];
+            
+            let html = `
+                <div class="mb-4">
+                    <button class="btn btn-primary w-100" onclick="startNewChat()">
+                        <i class="bi bi-plus-lg me-2"></i> Новый чат
+                    </button>
+                </div>
+                <div class="friends-list">
+            `;
+            
+            friends.forEach(friend => {
+                html += `
+                    <div class="friend-item d-flex align-items-center p-3 mb-2" 
+                         style="cursor: pointer; border-radius: 10px; background: #f8f9fa;"
+                         onclick="openChat('${friend.name}')">
+                        <div class="news-avatar me-3">${friend.avatar}</div>
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">${friend.name}</h6>
+                            <small class="text-muted">${friend.lastMessage}</small>
+                        </div>
+                        <div class="text-end">
+                            <small class="text-muted d-block">${friend.time}</small>
+                            ${friend.unread > 0 ? `<span class="badge bg-primary rounded-circle">${friend.unread}</span>` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        // Загрузка профиля
+        function loadProfile() {
+            const container = document.getElementById('profile-screen');
+            const user = appData.currentUser;
+            
+            container.innerHTML = `
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <div class="avatar mx-auto mb-3" style="width: 100px; height: 100px; background: linear-gradient(135deg, var(--russian-white), var(--russian-blue), var(--russian-red));">${user.avatar}</div>
+                        <h4 class="mb-2">${user.name}</h4>
+                        <p class="text-muted mb-3">${user.bio}</p>
+                        <div class="d-flex justify-content-center gap-2 mb-4">
+                            <span class="badge bg-warning">
+                                <i class="bi bi-trophy me-1"></i> Уровень ${user.level}
+                            </span>
+                            <span class="badge bg-info">
+                                <i class="bi bi-fire me-1"></i> ${user.streak} дней
+                            </span>
+                            <span class="badge bg-success">
+                                <i class="bi bi-translate me-1"></i> ${user.languages} языка
+                            </span>
+                        </div>
+                        <button class="btn btn-outline-russian" onclick="editProfile()">
+                            <i class="bi bi-pencil me-2"></i> Редактировать профиль
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Мои достижения</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-4 mb-3">
+                                <div class="achievement-card text-center">
+                                    <div class="achievement-badge badge-gold">
+                                        <i class="bi bi-award"></i>
+                                    </div>
+                                    <h6 class="mt-2">Первый урок</h6>
+                                    <small class="text-muted">Получено</small>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="achievement-card text-center">
+                                    <div class="achievement-badge badge-silver">
+                                        <i class="bi bi-lightning"></i>
+                                    </div>
+                                    <h6 class="mt-2">Неделя силы</h6>
+                                    <small class="text-muted">Получено</small>
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <div class="achievement-card text-center">
+                                    <div class="achievement-badge badge-russian">
+                                        <i class="bi bi-flag"></i>
+                                    </div>
+                                    <h6 class="mt-2">Патриот</h6>
+                                    <small class="text-muted">В процессе</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Начать новый чат
+        function startNewChat() {
+            alert('Функция "Новый чат" скоро будет доступна!');
+        }
+
+        // Открыть чат
+        function openChat(friendName) {
+            alert(`Открывается чат с ${friendName}`);
+        }
+
+        // Редактировать профиль
+        function editProfile() {
+            const newName = prompt('Введите ваше имя:', appData.currentUser.name);
+            if (newName) {
+                appData.currentUser.name = newName;
+                appData.currentUser.avatar = newName.split(' ').map(n => n[0]).join('').toUpperCase();
+                loadProfile();
+            }
+        }
+
+        // Быстрый старт урока
+        function quickStartLesson() {
+            const randomLang = languages[Math.floor(Math.random() * languages.length)];
+            startLanguage(randomLang.id);
+        }
+    </script>
+</body>
+</html>
